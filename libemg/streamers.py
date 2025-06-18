@@ -248,7 +248,8 @@ def myo_streamer(
     shared_memory_items : list | None = None,
     emg                 : bool = True, 
     imu                 : bool = False,
-    filtered            : bool=True):
+    filtered            : bool=True,
+    addr                : list | None = None):
     """The streamer for the myo armband. 
 
     This function connects to the Myo. It leverages the PyoMyo 
@@ -286,7 +287,7 @@ def myo_streamer(
 
     for item in shared_memory_items:
         item.append(Lock())
-    myo = MyoStreamer(filtered, emg, imu, shared_memory_items)
+    myo = MyoStreamer(filtered, emg, imu, shared_memory_items, addr)
     myo.start()
     return myo, shared_memory_items
 
